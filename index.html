@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section id="content"></section>
+
+    <script type="module">
+      import pages from './pages.js';
+      window.onload = () => {
+        showPage(getCurrentPage());
+      }
+      window.addEventListener('click', () => {
+        const pageNumber = (getCurrentPage() + 1) % pages.length;
+        location.hash = pages[pageNumber].hash || '';
+      });
+      window.addEventListener('hashchange', () => {
+        showPage(getCurrentPage());
+      })
+      function getCurrentPage() {
+        const currentPage = pages.findIndex(page => (page.hash === location.hash));
+        return currentPage > -1 ? currentPage : 0;
+      }
+      function showPage(pageNumber) {
+        const page = pages[pageNumber];
+        document.querySelector('#content').innerHTML = page.content || page.controller.getTemplate();
+        if (page.controller) {
+          const controller = new page.controller();
+        }
+      }
+    </script>
+  </body>
+</html>
