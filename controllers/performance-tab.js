@@ -12,9 +12,8 @@ export default class PerformanceTabController {
 
   static getTemplate() {
     return `
-      <div class="performance-background">
-        <img class="lemming" scr="images/lemming.gif" />
-      </div>
+      <img class="whole-page performance-tab" src="images/performance-tab.png" />
+      <img class="lemming" src="images/lemming.gif" />
       `;
   }
 }

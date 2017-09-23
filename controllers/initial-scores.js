@@ -6,29 +6,15 @@ const results = {
 };
 
 export default class InitialScoresController {
-  static calculateAngle(score) {
-    return (score - 50) / 100 * 360;
-  }
 
   static getTemplate() {
     return `
-    <div class="gauge-wrapper">
-      <div class="gauge">
-        <div class="circle">
-          <div class="mask mask-full" 
-            style="transform: rotate(${InitialScoresController.calculateAngle(75)}deg)">
-            <div class="fill fill--warning"></div>
-          </div>
-          <div class="mask mask-half">
-            <div class="fill fill--warning"></div>
-          </div>
-        </div>
-      </div>
-      <div class="centre">
-        <div class="number number--warning">${results.performance}</div>
-      </div>
-    </div>
-    `;
+    <div class="all-scores">
+      <score-dial score="${results.pwa}"></score-dial>
+      <score-dial score="${results.performance}"></score-dial>
+      <score-dial score="${results.accessibility}"></score-dial> 
+      <score-dial score="${results.practices}"></score-dial>
+    </div>`;
   }
 }
 
