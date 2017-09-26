@@ -7,26 +7,22 @@ const results = {
 
 export default class InitialScoresController {
 
+  constructor() {
+    document.querySelector('body').addEventListener('click', this.zoom, { once: true });
+  }
+
+  zoom(event) {
+    event.stopPropagation();
+    document.querySelector('.zoomer').classList.add('zoomed');
+  }
+
   static getTemplate() {
     return `
     <div class="all-scores">
-      <score-dial score="${results.pwa}"></score-dial>
-      <score-dial score="${results.performance}"></score-dial>
-      <score-dial score="${results.accessibility}"></score-dial> 
-      <score-dial score="${results.practices}"></score-dial>
+      <score-dial score="${results.pwa}" label="Progressive Web App"></score-dial>
+      <score-dial score="${results.performance}" label="Performance"></score-dial>
+      <score-dial class="zoomer" score="${results.accessibility}" label="Accessibility"></score-dial> 
+      <score-dial score="${results.practices}" label="Best Practices"></score-dial>
     </div>`;
   }
 }
-
-{/* <div class="lh-gauge lh-gauge--average" data-progress="55">
-      <div class="lh-gauge__circle">
-        <div class="lh-gauge__mask lh-gauge__mask--full" style="transform: rotate(99deg);">
-          <div class="lh-gauge__fill" style="transform: rotate(99deg);"></div>
-        </div>
-        <div class="lh-gauge__mask lh-gauge__mask--half">
-          <div class="lh-gauge__fill" style="transform: rotate(99deg);"></div>
-          <div class="lh-gauge__fill lh-gauge__fill--fix" style="transform: rotate(198deg);"></div>
-        </div>
-      </div>
-      <div class="lh-gauge__percentage">55</div>
-    </div> */}

@@ -2,6 +2,8 @@ import PerformanceIsHardController from './controllers/performance-is-hard.js';
 import PerformanceTabController from './controllers/performance-tab.js';
 import InitialScoresController from './controllers/initial-scores.js';
 import BestPracticesController from './controllers/best-practices.js';
+import StaticHtmlController from './controllers/static-html.js';
+import RewardGoodBehaviourController from './controllers/good-behaviour.js';
 
 export default [
   {
@@ -10,10 +12,8 @@ export default [
   {
     hash: '#fine',
     content: `
-      <div class="image-and-attribution">
-        <img src="images/this-is-fine.png" />
-        <div class="attribution">Source: gunshowcomic.com/648</div>
-      </div>`,
+      <img src="images/this-is-fine.png" class="centred-image" />
+      <div class="overlay-caption">Source: gunshowcomic.com/648</div>`,
   },
   {
     hash: '#performance-is-hard',
@@ -34,29 +34,63 @@ export default [
   {
     hash: '#accessibility',
     content: `
-      when most people think about accessibility, they think screen-readers and aria
-      picture
-      don't
-      most people using accessibility aren't relying on screen readers
-      they're using stuff like this
-      pictures of assistive technologies
-      accessibility pyramid
-      instead of worrying about screen readers, you should concentrate your page making sense
-      write logical, semantic html
-      make it work with a keyboard
-      sure, you're still going to need aria for the tricky  cases
-      but semantic html is going to get you most of the way there
-      and yes, our site doesn't just win the lighthouse accessibility, it's AA compliant
-      some kind of funny picture`,
+        <img class="centred-image tall" src="images/aria-pyramid.png" />
+        <div class="overlay-caption">From simplyaccessible.com/article/the-accessibility-stack/</div>`,
   },
   {
-    hash: '#best-practices',
-    controller: BestPracticesController,
+    hash: '#best-practices-score',
+    content: '<score-dial score="77"></score-dial>',
   },
   {
-    hash: '#performance',
+    hash: '#non-standard',
+    content: `do the non-standard warning box from mdn`,
+  },
+  {
+    hash: '#blocking',
+    content: '<img src="images/notification.png" class="centred-image" />',
+  },
+  {
+    hash: '#password',
+    content: '<img src="images/troy-hunt.png" class="centred-image tall" />',
+  },
+  {
+    hash: '#http2',
+    content: '<img src="images/http2-all-the-things.jpg" class="centred-image" />',
+  },
+  {
+    hash: '#best-practices-after',
+    content: '<score-dial score=""></score>'
+  },
+  {
+    hash: '#performance-score',
+    content: '<score-dial score="64"></score-dial>',
+  },
+  {
+    hash: '#performance-score-breakdown',
+    content: 'time to paint stuff',
+  },
+  {
+    hash: '#static-html',
+    controller: StaticHtmlController,
+  },
+  {
+    hash: '#reward-good-behaviour',
+    controller: RewardGoodBehaviourController,
+  },
+  {
+    hash: '#performance-scores-after',
+    content: '<score-dial score=""></score-dial>'
   },
   {
     hash: '#pwa',
-  }
+    content: '<score-dial score="45"></score-dial>'
+  },
+  {
+    hash: '#pwa-after',
+    content: '<score-dial score=""><score-dial>'
+  },
+  {
+    hash: '#conclusion',
+    content: 'nfi',
+  },
 ]

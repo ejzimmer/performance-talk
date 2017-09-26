@@ -9,28 +9,34 @@ export default class ScoreDial extends HTMLElement {
     return this.attributes['score'].value;
   }
 
+  get label() {
+    return this.attributes['label'].value;
+  }
+
   get angle() {
-    return (this.score - 50) / 100 * 360;
+    return (this.score/200) * 360;
+  }
+
+  get fixAngle() {
+    return (this.score/100) * 360;
   }
 
   get template() {
     return `
       ${this.style}
       <div class="gauge-wrapper">
-        <div class="gauge">
+        <div class="gauge gauge--${this.level}">
           <div class="circle">
-            <div class="mask mask-full" 
-              style="transform: rotate(${this.angle}deg)">
-              <div class="fill fill--${this.level}"></div>
+            <div class="mask mask-full" style="transform: rotate(${this.angle}deg)">
+              <div class="fill" style="transform: rotate(${this.angle}deg);"></div>
             </div>
             <div class="mask mask-half">
-              <div class="fill fill--${this.level}"></div>
+              <div class="fill" style="transform: rotate(${this.angle}deg);"></div>
             </div>
           </div>
+          <div class="percentage">${this.score}</div>
         </div>
-        <div class="centre">
-          <div class="number number--${this.level}">${this.score}</div>
-        </div>
+        <div class="gauge-label">${this.label}</div>
       </div>`
   }
 
@@ -42,63 +48,76 @@ export default class ScoreDial extends HTMLElement {
     return `
 
     <style>
-      
       .gauge-wrapper {
         position: relative;
+        display: inline-flex;
+        align-items: center;
+        flex-direction: column;
+        flex: 1;
         --pass-colour: green;
         --warning-colour: orange;
+        --diameter: 200px;
+        width: 100%;
+        height: 100%;
       }
       
       .gauge {
         background-color: #ccc;
-        position: absolute;
-        height: 100px;
-        width: 100px;
+        height: var(--diameter);
+        width: var(--diameter);
         border-radius: 50%;
-        clip-path: polygon(50%, 100%)
+        --inset-size: calc(.88 * var(--diameter));
+        --spacer: calc(.06 * var(--diameter));
+        --transition-length: 1s;
+      }
+
+      .gauge--pass {
+        --circle-colour: var(--pass-colour);
+        color: var(--circle-colour);
+      }
+      .gauge--warning {
+        --circle-colour: var(--warning-colour);
+        color: var(--circle-colour);
       }
       
       .mask, .fill {
-        height: 100px;
-        width: 100px;
+        height: var(--diameter);
+        width: var(--diameter);
         position: absolute;
         border-radius: 50%;
+        transition: transform var(--transition-length);
       }
       
       .mask {
-        clip: rect(0px, 100px, 100px, 50px);
+        clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
       }
-      
-      .fill--pass {
-        background-color: var(--pass-colour);
+
+      .mask .fill {
+        clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        background-color: var(--circle-colour);
+        backface-visibility: hidden;
       }
-      .fill--warning {
-        background-color: var(--warning-colour);
-      }
-      
-      .centre {
-        display: flex;
+
+      .percentage {
+        font-size: 3em;
         border-radius: 50%;
-        background-color: var(--background-colour);
-        width: 94px;
-        height: 94px;
+        width: var(--inset-size);
+        height: var(--inset-size);
         position: absolute;
-        left: 3px;
-        top: 3px;
+        margin-left: var(--spacer);
+        margin-top: var(--spacer);
+        background-color: var(--background-colour);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      
-      .number {
-        margin: auto;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        font-size: 36px;
+
+      .gauge-label {
+        font-size: 2em;
+        margin-top: 20px;
+        text-align: center;
       }
-      .number--pass {
-        color: var(--pass-colour);
-      }
-      .number--warning {
-        color: var(--warning-colour);
-      }
-    </style>`;
+   </style>`;
   }
 }
 
