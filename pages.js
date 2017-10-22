@@ -38,20 +38,28 @@ export default [
         <div class="overlay-caption">From simplyaccessible.com/article/the-accessibility-stack/</div>`,
   },
   {
+    hash: '#guide-pony',
+    content: '<img class="centred-image tall" src="images/Guide_horse.jpg" />',
+  },
+  {
+    hash: '#us',
+    content: '<img class="centred-image" src="images/angular-meetup.jpeg" />',
+  },
+  {
     hash: '#best-practices-score',
-    content: '<score-dial score="77"></score-dial>',
+    content: '<score-dial score="77" label="Best Practices" class="alone"></score-dial>',
   },
   {
     hash: '#non-standard',
-    content: `do the non-standard warning box from mdn`,
+    content: '<div class="deprecated"><img src="images/deprecated-small.png" /></div>',
   },
   {
     hash: '#blocking',
-    content: '<img src="images/notification.png" class="centred-image" />',
+    content: '<div class="notification"><img src="images/notification.png" /></div>',
   },
   {
     hash: '#password',
-    content: '<img src="images/troy-hunt.png" class="centred-image tall" />',
+    content: '<img src="images/troy-hunt.png" class="tweet" />',
   },
   {
     hash: '#http2',
@@ -59,11 +67,11 @@ export default [
   },
   {
     hash: '#best-practices-after',
-    content: '<score-dial score=""></score>'
+    content: '<score-dial score="95" label="Best Practices" class="alone"></score>'
   },
   {
     hash: '#performance-score',
-    content: '<score-dial score="64"></score-dial>',
+    content: '<score-dial score="64" label="Performance" class="alone"></score-dial>',
   },
   {
     hash: '#performance-score-breakdown',

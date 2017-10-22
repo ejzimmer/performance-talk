@@ -13,7 +13,9 @@ export default class InitialScoresController {
 
   zoom(event) {
     event.stopPropagation();
-    document.querySelector('.zoomer').classList.add('zoomed');
+    const scores = document.querySelector('.all-scores');
+    scores.style.transformOrigin = 'bottom left';
+    scores.classList.add('zoomed');
   }
 
   static getTemplate() {
@@ -21,7 +23,7 @@ export default class InitialScoresController {
     <div class="all-scores">
       <score-dial score="${results.pwa}" label="Progressive Web App"></score-dial>
       <score-dial score="${results.performance}" label="Performance"></score-dial>
-      <score-dial class="zoomer" score="${results.accessibility}" label="Accessibility"></score-dial> 
+      <score-dial score="${results.accessibility}" label="Accessibility"></score-dial> 
       <score-dial score="${results.practices}" label="Best Practices"></score-dial>
     </div>`;
   }

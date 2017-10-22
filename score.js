@@ -27,11 +27,11 @@ export default class ScoreDial extends HTMLElement {
       <div class="gauge-wrapper">
         <div class="gauge gauge--${this.level}">
           <div class="circle">
-            <div class="mask mask-full" style="transform: rotate(${this.angle}deg)">
-              <div class="fill" style="transform: rotate(${this.angle}deg);"></div>
+            <div class="mask mask-full">
+              <div class="fill"></div>
             </div>
             <div class="mask mask-half">
-              <div class="fill" style="transform: rotate(${this.angle}deg);"></div>
+              <div class="fill"></div>
             </div>
           </div>
           <div class="percentage">${this.score}</div>
@@ -48,13 +48,26 @@ export default class ScoreDial extends HTMLElement {
     return `
 
     <style>
+      .fill, .mask-full {
+        animation: 1s turn forwards linear;
+      }
+
+      @keyframes turn {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(${this.angle}deg);
+        }
+      }
+
       .gauge-wrapper {
         position: relative;
         display: inline-flex;
         align-items: center;
         flex-direction: column;
         flex: 1;
-        --pass-colour: green;
+        --pass-colour: #00D100;
         --warning-colour: orange;
         --diameter: 200px;
         width: 100%;
@@ -62,7 +75,7 @@ export default class ScoreDial extends HTMLElement {
       }
       
       .gauge {
-        background-color: #ccc;
+        background-color: #24c;
         height: var(--diameter);
         width: var(--diameter);
         border-radius: 50%;

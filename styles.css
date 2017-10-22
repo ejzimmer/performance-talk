@@ -169,11 +169,11 @@ body {
   display: grid;
   margin: auto;
   grid-template-columns: 50% 50%;
+  transition: transform 1s;
 }
 
 .all-scores > score-dial {
   width: 40vw;
-  height: 40vw;
   margin: 2vw;
 }
 
@@ -195,11 +195,52 @@ body {
   right: 20px;
 }
 
-.zoomer {
-  transition: transform 1s;
+.zoomed {
+  transform: scale(2);
 }
 
-.zoomer.zoomed {
-  transform: scale(3) translateX(10%);
-  z-index: 1;
+score-dial.alone {
+  margin: auto;
+}
+
+.deprecated {
+  margin: auto;
+  background-color: #ffe7e8;
+  border-left: 10px solid #e66465;
+  padding: 20px;
+}
+
+.deprecated img {
+  height: 10vh;
+}
+
+.notification {
+  --border: 1px solid grey;
+  --box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, .4);
+  border: var(--border);
+  border-radius: 2px;
+  display: flex;
+  margin: auto;
+  box-shadow: var(--box-shadow);
+  position: relative;
+}
+
+.notification::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  transform: rotate(.125turn);
+  background-color: white;
+  top: -11px;
+  left: 15px;
+  border-left: var(--border); 
+  border-top: var(--border);
+  box-shadow: var(--box-shadow);
+}
+
+.tweet {
+  height: 90vh;
+  margin: auto;
+  margin-bottom: 0;
 }
