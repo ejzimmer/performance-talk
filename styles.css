@@ -288,3 +288,18 @@ score-dial.alone {
   background-color: var(--background-colour);
   border: 4px solid;
 }
+
+.shit-loading {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+}
+
+.loaded {
+  background-image: url('images/landing-page.png');
+  background-size: cover;
+  background-position: center;
+}

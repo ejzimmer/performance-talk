@@ -4,6 +4,7 @@ import InitialScoresController from './controllers/initial-scores.js';
 import TimeToPaintController from './controllers/time-to-paint.js';
 import StaticHtmlController from './controllers/static-html.js';
 import RewardGoodBehaviourController from './controllers/good-behaviour.js';
+import SlowLoadController from './controllers/slow-load.js';
 
 export default [
   {
@@ -76,6 +77,10 @@ export default [
   {
     hash: '#performance-score-breakdown',
     controller: TimeToPaintController,
+  },
+  {
+    hash: '#slow-load',
+    controller: SlowLoadController,
   },
   {
     hash: '#static-html',
