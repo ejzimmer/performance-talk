@@ -1,7 +1,7 @@
 import PerformanceIsHardController from './controllers/performance-is-hard.js';
 import PerformanceTabController from './controllers/performance-tab.js';
 import InitialScoresController from './controllers/initial-scores.js';
-import BestPracticesController from './controllers/best-practices.js';
+import TimeToPaintController from './controllers/time-to-paint.js';
 import StaticHtmlController from './controllers/static-html.js';
 import RewardGoodBehaviourController from './controllers/good-behaviour.js';
 
@@ -75,7 +75,7 @@ export default [
   },
   {
     hash: '#performance-score-breakdown',
-    content: 'time to paint stuff',
+    controller: TimeToPaintController,
   },
   {
     hash: '#static-html',

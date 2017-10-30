@@ -244,3 +244,47 @@ score-dial.alone {
   margin: auto;
   margin-bottom: 0;
 }
+
+.measures {
+  margin: auto;
+  width: 80vw;
+  font-size: 2em;
+}
+
+.measure {
+  width: 3px;
+  transition: 2s width;
+  margin: 1em 0;
+  border: 4px solid;
+}
+
+.measure.grown {
+  width: 100%;
+}
+.measure.index.grown {
+  width: 50%;
+}
+.measure.latency.grown {
+  width: 3%;
+}
+
+.slow {
+  border-color: red;
+}
+.fast {
+  border-color: green;
+}
+.medium {
+  border-color: orange;
+}
+
+.times, .perceptual-speed-index, .input-latency {
+  transition: transform .5s, border-width .5s, padding .5s;
+}
+
+.embiggen {
+  transform: scale(1.1);
+  padding: 20px;
+  background-color: var(--background-colour);
+  border: 4px solid;
+}
