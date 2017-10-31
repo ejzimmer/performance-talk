@@ -116,13 +116,19 @@ body {
 }
 
 .fall-down {
-  animation: fall-down 0.3s forwards ease-in;
+  animation: fall-down 1s forwards ease;
+  transform-origin: bottom center;
 }
 
 @keyframes fall-down {
+  40% {
+    transform: rotate(230deg);
+  }
+  70% {
+    transform: rotate(170deg);
+  }
   to {
     transform: rotate(190deg);
-    transform-origin: bottom center;  
   }
 }
 
@@ -278,7 +284,7 @@ score-dial.alone {
   border-color: orange;
 }
 
-.times, .perceptual-speed-index, .input-latency {
+.times, .perceptual-speed-index, .input-latency, .header, .controller {
   transition: transform .5s, border-width .5s, padding .5s;
 }
 
@@ -287,9 +293,14 @@ score-dial.alone {
   padding: 20px;
   background-color: var(--background-colour);
   border: 4px solid;
+  position: relative;
 }
 
-.shit-loading {
+.controller.embiggen, .cloak.embiggen {
+  color: #0f0;
+}
+
+.shit-loading, .loading {
   position: fixed;
   left: 0;
   right: 0;
@@ -298,13 +309,25 @@ score-dial.alone {
   background-color: white;
 }
 
-.loaded {
-  background-image: url('images/landing-page.png');
+.loaded, .loading {
   background-size: cover;
   background-position: center;
+}
+
+.loaded {
+  background-image: url('images/landing-page.png');  
+}
+
+.better-loading {
+  background-image: url('images/landing-page-no-middle.png');
 }
 
 .big-text {
   font-size: 4vw;
   margin-left: 10vw;
+}
+
+.medium-text {
+  font-size: 2vw;
+  margin-left: 5vw;
 }

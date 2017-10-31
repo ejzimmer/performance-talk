@@ -4,6 +4,8 @@ import InitialScoresController from './controllers/initial-scores.js';
 import TimeToPaintController from './controllers/time-to-paint.js';
 import RewardGoodBehaviourController from './controllers/good-behaviour.js';
 import SlowLoadController from './controllers/slow-load.js';
+import StaticHtmlController from './controllers/static-html.js';
+import BetterLoadController from './controllers/better-load.js';
 
 export default [
   {
@@ -93,32 +95,11 @@ export default [
   },
   {
     hash: '#static-html',
-    content: `<pre>
-&lt;body&gt;
-  &lt;header ng-controller="AppHeaderController as $ctrl"&gt;
-    &lt;img src="assets/digitalid-logo.svg" alt="digital ID" /&gt;
-    &lt;div ng-cloak&gt;
-      &lt;div&gt;Verifying for&lt;/div&gt;
-      &lt;div&gt;{{counterParty.display_name}}&lt;/div&gt;
-      &lt;img ng-src="{{counterParty.logo}}" /&gt;
-    &lt;/div&gt;
-  &lt;header&gt;
-
-  &lt;div ui-view&gt;&lt;/div&gt;
-
-  &lt;footer ng-controller="AppFooterController as $ctrl"&gt;
-    &lt;button ng-cloak ng-click="$ctrl.cancel()"&gt;
-      Cancel and return to {{counterParty.display_name}}
-    &lt;/button&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a target="_blank" href="https://www.digitalid.com/help-and-support"&gt;Help&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a target="_blank" href="../../terms/web.html"&gt;Terms&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a target="_blank" href="../../privacy.html"&gt;Terms&lt;/a&gt;&lt;/li&gt;
-            <li><a target="_blank" href="../../privacy.html" data-event="site interaction" data-category="digital id:footer" data-description="privacy">Privacy</a></li>
-          </ul>
-        </footer>
-      </div>
-`
+    controller: StaticHtmlController,
+  },
+  { 
+    hash: '#static-html-result',
+    controller: BetterLoadController,
   },
   {
     hash: '#reward-good-behaviour',
