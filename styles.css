@@ -303,3 +303,8 @@ score-dial.alone {
   background-size: cover;
   background-position: center;
 }
+
+.big-text {
+  font-size: 4vw;
+  margin-left: 10vw;
+}
