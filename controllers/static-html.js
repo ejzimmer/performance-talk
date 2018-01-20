@@ -1,29 +1,31 @@
+const elements = ['.header', '.footer', '.spinner', '.controller', '.cloak'];
+const body = document.querySelector('body');
+
 export default class StaticHtmlController {
   constructor() {
-    const body = document.querySelector('body');
+    let elementIndex = -1;
 
-    body.addEventListener('click', (event) => {
-      event.stopPropagation();
-      document.querySelector('.header').classList.add('embiggen');
-
+    function addListener() {
       body.addEventListener('click', (event) => {
         event.stopPropagation();
-        document.querySelector('.header').classList.remove('embiggen');
-        document.querySelector('.footer').classList.add('embiggen');
+        elementIndex++;
+        highlightElement();
 
-        body.addEventListener('click', (event) => {
-          event.stopPropagation();
-          document.querySelector('.footer').classList.remove('embiggen');
-          document.querySelectorAll('.controller').forEach(div => div.classList.add('embiggen'));
-
-          body.addEventListener('click', (event) => {
-            event.stopPropagation();
-            document.querySelectorAll('.controller').forEach(div => div.classList.remove('embiggen'));
-            document.querySelectorAll('.cloak').forEach(div => div.classList.add('embiggen'));
-          }, { once: true });
-        }, { once: true });
+        if (elementIndex < elements.length) {
+          addListener();
+        } 
       }, { once: true });
-    }, { once: true });
+    }
+
+    function highlightElement() {
+      if (elementIndex > 0) {
+        document.querySelectorAll(elements[elementIndex - 1]).forEach(element => element.classList.remove('embiggen'));
+      }
+      document.querySelectorAll(elements[elementIndex]).forEach(element => element.classList.add('embiggen'));
+    }
+
+    addListener();
+
   }
 
   static getTemplate() {
@@ -39,6 +41,7 @@ export default class StaticHtmlController {
     &lt;/div&gt;
   &lt;header&gt;</div>
   &lt;div ui-view&gt;&lt;/div&gt;
+  <div class="spinner">Put the spinner code in here</div>
   <div class="footer">
   &lt;footer <span class="controller">ng-controller="AppFooterController as $ctrl"</span>&gt;
     &lt;button <span class="cloak">ng-cloak</span> ng-click="$ctrl.cancel()"&gt;

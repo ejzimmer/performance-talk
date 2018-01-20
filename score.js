@@ -3,6 +3,10 @@ export default class ScoreDial extends HTMLElement {
     super();
     const shadowRoot = this.attachShadow({ mode: 'closed' });
     shadowRoot.innerHTML = this.template;
+    
+    if (this.score < 50) {
+      shadowRoot.querySelector('.mask-full').style.display = 'none';
+    }
   }
 
   get score() {
@@ -14,12 +18,26 @@ export default class ScoreDial extends HTMLElement {
   }
 
   get angle() {
-    return (this.score/200) * 360;
+    return ((50 - this.score) / 100) * -1;
   }
-
-  get fixAngle() {
-    return (this.score/100) * 360;
-  }
+  // get template() {
+  //   return `
+  //     ${this.style}
+  //     <div class="gauge-wrapper">
+  //       <div class="gauge gauge--${this.level}">
+  //         <div class="circle">
+  //           <div class="mask mask-half">
+  //             <div class="fill"></div>
+  //           </div>
+  //           <div class="mask mask-full">
+  //             <div class="fill"></div>
+  //           </div>
+  //         </div>
+  //         <div class="percentage">${this.score}</div>
+  //       </div>
+  //       <div class="gauge-label">${this.label}</div>
+  //     </div>`
+  // }
 
   get template() {
     return `
@@ -27,10 +45,10 @@ export default class ScoreDial extends HTMLElement {
       <div class="gauge-wrapper">
         <div class="gauge gauge--${this.level}">
           <div class="circle">
-            <div class="mask mask-full">
+            <div class="mask mask-half">
               <div class="fill"></div>
             </div>
-            <div class="mask mask-half">
+            <div class="mask mask-full">
               <div class="fill"></div>
             </div>
           </div>
@@ -48,16 +66,16 @@ export default class ScoreDial extends HTMLElement {
     return `
 
     <style>
-      .fill, .mask-full {
+       .fill {
         animation: 1s turn forwards linear;
       }
 
       @keyframes turn {
         from {
-          transform: rotate(0);
+          transform: rotate(-180deg);
         }
         to {
-          transform: rotate(${this.angle}deg);
+          transform: rotate(${this.angle}turn);
         }
       }
 
@@ -92,23 +110,20 @@ export default class ScoreDial extends HTMLElement {
         --circle-colour: var(--warning-colour);
         color: var(--circle-colour);
       }
-      
+
       .mask, .fill {
         height: var(--diameter);
         width: var(--diameter);
-        position: absolute;
-        border-radius: 50%;
-        transition: transform var(--transition-length);
-      }
-      
-      .mask {
         clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+        border-radius: 50%;
+      }
+
+      .mask {
+        position: absolute;
       }
 
       .mask .fill {
-        clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-        background-color: var(--circle-colour);
-        backface-visibility: hidden;
+        background-color: green;
       }
 
       .percentage {

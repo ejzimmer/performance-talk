@@ -331,3 +331,17 @@ score-dial.alone {
   font-size: 2vw;
   margin-left: 5vw;
 }
+
+.build-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.build-process {
+  display: flex;
+  flex-direction: row;
+}
+
+.highlight-on-hover:hover {
+  color: #0f0;
+}

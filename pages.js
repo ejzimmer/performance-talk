@@ -6,6 +6,8 @@ import RewardGoodBehaviourController from './controllers/good-behaviour.js';
 import SlowLoadController from './controllers/slow-load.js';
 import StaticHtmlController from './controllers/static-html.js';
 import BetterLoadController from './controllers/better-load.js';
+import TwoBundlesController from './controllers/two-bundles.js';
+import LoadTimeAfterController from './controllers/load-time-after.js';
 
 export default [
   {
@@ -88,37 +90,75 @@ export default [
     content: `<pre class="big-text">
 &lt;html&gt;
   &lt;body&gt;
-    &lt;div ui-view&gt;&lt;/div&gt;
-    &lt;script src="app.js"&gt;&lt;/script&gt;
+    <span class="highlight-on-hover">&lt;div ui-view&gt;&lt;/div&gt;</span>
+    <span class="highlight-on-hover">&lt;script src="app.js"&gt;&lt;/script&gt;</span>
   &lt;/body&gt;
 &lt;/html&gt;</pre>`,
+  },
+  {
+    hash: '#static-elements',
+    content: 'there\'s a bunch of stuff we could render without the javascript',
   },
   {
     hash: '#static-html',
     controller: StaticHtmlController,
   },
-  { 
-    hash: '#static-html-result',
-    controller: BetterLoadController,
-  },
   {
     hash: '#reward-good-behaviour',
-    controller: RewardGoodBehaviourController,
+    content: '<div style="font-size: 7em; margin: auto">🍭</div>',
+  },
+  {
+    hash: '#browser-compatibility',
+    content: '<img class="centred-image" src="images/caniuse.png" />'
+  },
+  {
+    hash: '#feature-detection',
+    content: `
+<pre class="big-text">
+var modernBrowser = function () {
+  try {
+    <span class="highlight-on-hover">new Function('async => {}')();</span>
+  } catch (error) {
+    <span class="highlight-on-hover">return false;</span>
+  }
+  <span class="highlight-on-hover">return true;</span>
+})();
+</pre>`
+  },
+  {
+    hash: '#load-script',
+    content: `
+      <pre class="big-text">
+        the thing that loads the script
+      </pre>
+    `
+  },
+  {
+    hash: '#time-to-load',
+    controller: LoadTimeAfterController,
   },
   {
     hash: '#performance-scores-after',
-    content: '<score-dial score=""></score-dial>'
+    content: '<score-dial score="92" label="Performance" class="alone"></score-dial>'
   },
   {
     hash: '#pwa',
-    content: '<score-dial score="45"></score-dial>'
+    content: '<score-dial score="45" label="Progressive Web App" class="alone"></score-dial>'
+  },
+  {
+    hash: '#progressive-bits',
+    content: 'Image of digital id on phone<img src="images/downasaur.jpg" />',
   },
   {
     hash: '#pwa-after',
-    content: '<score-dial score=""><score-dial>'
+    content: '<score-dial score="55" label="Progressive Web App" class="alone"><score-dial>'
+  },
+  {
+    hash: '#result',
+    content: 'back to business, happy we can show something, 30%',
   },
   {
     hash: '#conclusion',
-    content: 'nfi',
+    content: 'measuring things is important, tools like lighthouse can help, make sure you only use the things that are relevant to you',
   },
 ]
