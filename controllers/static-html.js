@@ -39,10 +39,11 @@ export default class StaticHtmlController {
       &lt;div&gt;{{counterParty.display_name}}&lt;/div&gt;
       &lt;img ng-src="{{counterParty.logo}}" /&gt;
     &lt;/div&gt;
-  &lt;header&gt;</div>
-  &lt;div ui-view&gt;&lt;/div&gt;
-  <div class="spinner">Put the spinner code in here</div>
-  <div class="footer">
+  &lt;header&gt;</div><div class="spinner">
+  &lt;div ui-view&gt;
+    &lt;div class="spinner"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  </div><div class="footer">
   &lt;footer <span class="controller">ng-controller="AppFooterController as $ctrl"</span>&gt;
     &lt;button <span class="cloak">ng-cloak</span> ng-click="$ctrl.cancel()"&gt;
       Cancel and return to {{counterParty.display_name}}

@@ -10,34 +10,21 @@ export default class ScoreDial extends HTMLElement {
   }
 
   get score() {
-    return this.attributes['score'].value;
+    const attr = this.attributes['score'];
+    return attr ? attr.value : 0;
   }
 
   get label() {
-    return this.attributes['label'].value;
+    const attr = this.attributes['label'];
+    return attr ? attr.value : '';
   }
 
   get angle() {
-    return ((50 - this.score) / 100) * -1;
+    return this.score > 50 ? 0 : ((50 - this.score) / 100) * -1;
   }
-  // get template() {
-  //   return `
-  //     ${this.style}
-  //     <div class="gauge-wrapper">
-  //       <div class="gauge gauge--${this.level}">
-  //         <div class="circle">
-  //           <div class="mask mask-half">
-  //             <div class="fill"></div>
-  //           </div>
-  //           <div class="mask mask-full">
-  //             <div class="fill"></div>
-  //           </div>
-  //         </div>
-  //         <div class="percentage">${this.score}</div>
-  //       </div>
-  //       <div class="gauge-label">${this.label}</div>
-  //     </div>`
-  // }
+  get obtuseAngle() {
+    return (this.score - 50) / 100;
+  }
 
   get template() {
     return `
@@ -66,16 +53,25 @@ export default class ScoreDial extends HTMLElement {
     return `
 
     <style>
-       .fill {
+      .fill {
         animation: 1s turn forwards linear;
+      }
+
+      .mask-half {
+        --from-angle: -180deg;
+        --angle: ${this.angle}turn;
+      }
+      .mask-full {
+        --from-angle: 0;
+        --angle: ${this.obtuseAngle}turn;
       }
 
       @keyframes turn {
         from {
-          transform: rotate(-180deg);
+          transform: rotate(var(--from-angle));
         }
         to {
-          transform: rotate(${this.angle}turn);
+          transform: rotate(var(--angle));
         }
       }
 
@@ -118,12 +114,16 @@ export default class ScoreDial extends HTMLElement {
         border-radius: 50%;
       }
 
+      .mask.mask-full {
+        clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+      }
+
       .mask {
         position: absolute;
       }
 
       .mask .fill {
-        background-color: green;
+        background-color: currentColor;
       }
 
       .percentage {
